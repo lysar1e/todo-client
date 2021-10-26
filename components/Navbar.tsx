@@ -37,7 +37,7 @@ export const Navbar: React.FC<Props> = observer(({isLogin}) => {
     <nav className={theme.theme}>
         <div className={`nav-wrapper navbar ${theme.theme === "dark" ? "dark" : "blue"} container`}>
         <Link href="/">
-          <a className="brand-logo">MERN Todo app</a>
+          <a className="brand-logo">MERN Todo App</a>
         </Link>
         {isLogin ? (
           <ul id="nav-mobile" className="right hide-on-med-and-down">
