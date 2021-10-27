@@ -2,11 +2,17 @@ import {GetServerSideProps, NextPage} from "next";
 import { RegistrationComponent } from "../components/RegistrationComponent";
 import {notRequireAuthentication} from "../HOC/requireAuthentication";
 import {Navbar} from "../components/Navbar";
+import Head from 'next/head'
 
 const Registration: NextPage = () => {
   return (
       <>
-          <Navbar isLogin={false}/>
+      <Head>
+        <title>Mern Todo App - регистрация</title>
+        <meta name="description" content="Mern todo app это - веб-приложение для записей списков дел, которые нужно сделать. Приложение имеет удобный интерфейс." />
+        <meta name="keywords" content="mern todo app, mern, todo, список дел, app" />
+      </Head>
+      <Navbar isLogin={false}/>
       <RegistrationComponent />
       </>
   );
