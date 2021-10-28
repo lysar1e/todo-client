@@ -8,9 +8,9 @@ const Login: NextPage = () => {
   return (
       <>
       <Head>
-        <title>Mern Todo App - авторизация</title>
-        <meta name="description" content="Mern todo app это - веб-приложение для записей списков дел, которые нужно сделать. Приложение имеет удобный интерфейс." />
-        <meta name="keywords" content="mern todo app, mern, todo, список дел, app" />
+       <meta name="description" content="Mern todo app это - веб-приложение для записей списков дел, которые нужно сделать. Приложение имеет удобный интерфейс." />
+       <meta name="keywords" content="mern todo app, mern, todo, список дел, app" />
+       <title>Mern Todo App - авторизация</title> 
       </Head>
       <Navbar isLogin={false} />
       <SignInComponent />
