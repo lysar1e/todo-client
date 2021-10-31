@@ -79,6 +79,26 @@ export const Navbar: React.FC<Props> = observer(({isLogin}) => {
           </ul>
             </>
         ) : (
+            <>
+                <div className="burger-icon right">
+                    <BurgerIcon setClicked={setClicked} />
+                </div>
+                <div className={`mobile-modal ${theme.theme} ${clicked ? 'show-modal' : ""}`}>
+                    <div className="mobile-modal__content">
+                        <span className={`mobile-modal__close ${theme.theme}`} onClick={() => setClicked(false)}>×</span>
+                        <div className="switch">
+                            <label>
+                                <span className={`mobile-text switch-text ${theme.theme}`}>Light theme</span>
+                                <input type="checkbox" defaultChecked={checked} onClick={() => changeTheme()} />
+                                <span className="lever"></span>
+                                <span className={`mobile-text switch-text ${theme.theme}`}>Dark theme</span>
+                            </label>
+                        </div>
+                        <Link href="/">
+                            <a onClick={() => logout()} className={`quit ${theme.theme}`}>Выйти</a>
+                        </Link>
+                    </div>
+                </div>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             <li>
                 <div className="switch">
@@ -94,6 +114,7 @@ export const Navbar: React.FC<Props> = observer(({isLogin}) => {
               </Link>
             </li>
           </ul>
+          </>
         )}
       </div>
     </nav>
