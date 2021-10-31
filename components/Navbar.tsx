@@ -5,12 +5,14 @@ import {URL} from "../constants/url";
 import {useRouter} from "next/router";
 import theme from "../store/theme";
 import {observer} from "mobx-react-lite";
+import {BurgerIcon} from "./BurgerIcon";
 type Props = {
     isLogin?: boolean;
 }
 export const Navbar: React.FC<Props> = observer(({isLogin}) => {
     const router = useRouter();
     const [checked, setChecked] = useState(false);
+    const [clicked, setClicked] = useState(false);
     useEffect(() => {
         if (theme.theme === "dark") {
             setChecked(true);
@@ -37,11 +39,31 @@ export const Navbar: React.FC<Props> = observer(({isLogin}) => {
     <nav className={theme.theme}>
         <div className={`nav-wrapper navbar ${theme.theme === "dark" ? "dark" : "blue"} container`}>
         <Link href="/">
-          <a className="brand-logo">MERN Todo App</a>
+          <a className="brand-logo">MERN Todo app</a>
         </Link>
         {isLogin ? (
-          <ul id="nav-mobile" className="right hide-on-med-and-down">
-            <li>
+            <>
+                <div className="burger-icon right">
+                    <BurgerIcon setClicked={setClicked} />
+                </div>
+                <div className={`mobile-modal ${theme.theme} ${clicked ? 'show-modal' : ""}`}>
+                    <div className="mobile-modal__content">
+                        <span className={`mobile-modal__close ${theme.theme}`} onClick={() => setClicked(false)}>×</span>
+                        <div className="switch">
+                            <label>
+                                <span className={`mobile-text switch-text ${theme.theme}`}>Light theme</span>
+                                <input type="checkbox" defaultChecked={checked} onClick={() => changeTheme()} />
+                                <span className="lever"></span>
+                                <span className={`mobile-text switch-text ${theme.theme}`}>Dark theme</span>
+                            </label>
+                        </div>
+                        <Link href="/">
+                            <a onClick={() => logout()} className={`quit ${theme.theme}`}>Выйти</a>
+                        </Link>
+                    </div>
+                </div>
+                <ul id="nav-mobile" className="right hide-on-med-and-down">
+                          <li>
                 <div className="switch">
                     <label>
                         <span className={theme.theme === "light" ? "light-text switch-text" : "switch-text"}>Light theme</span>
@@ -55,6 +77,7 @@ export const Navbar: React.FC<Props> = observer(({isLogin}) => {
               </Link>
             </li>
           </ul>
+            </>
         ) : (
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             <li>
