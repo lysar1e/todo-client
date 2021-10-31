@@ -248,8 +248,61 @@ nav {
   margin-left: 10px;
 }
 .dark {
-  color: white;
+  color: white!important;
 }
 .get-link {
   margin-top: 20px;
+}
+
+@media (min-width: 1000px) {
+  .burger-icon {
+    display: none;
+  }
+}
+@media (max-width: 1000px) {
+  .burger-icon {
+    display: block;
+  }
+}
+.burger-icon {
+  cursor: pointer;
+  margin-top: 10px;
+}
+.mobile-modal {
+  display: none;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  margin: 0 auto;
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto;
+  background-color: #ffffff;
+}
+.mobile-modal__content {
+  width: 50%;
+  margin: 0 auto;
+  font-size: 32px;
+}
+.mobile-modal__close {
+  float: right;
+  font-size: 80px;
+  color: black;
+  margin-top: -90px;
+  cursor: pointer;
+}
+.quit {
+  color: black;
+}
+
+.mobile-modal.dark {
+  background-color: #000000!important;
+}
+.mobile-text.light {
+  color: black!important;
+}
+.show-modal {
+  display: block!important;
 }
