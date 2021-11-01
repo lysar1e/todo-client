@@ -20,11 +20,16 @@ export const BoardComponent: React.FC<BoardProps> = observer (({board}) => {
     const [inviteLink, setInviteLink] = useState("");
     const createTodo = () => {
         try {
-            setIsLoading(true);
-            axiosJWT.post(`${URL}/board/create-todo`, {boardId: id, text}, {withCredentials: true}).then(() => {
-                router.replace(`/board/${id}`);
-                setIsLoading(false);
-            })
+            if (text) {
+                setIsLoading(true);
+                axiosJWT.post(`${URL}/board/create-todo`, {boardId: id, text}, {withCredentials: true}).then(() => {
+                    router.replace(`/board/${id}`);
+                    setIsLoading(false);
+                    setText("");
+                })
+            } else {
+                alert("Невозможно добавить пустую задачу!");
+            }
         } catch (e) {
             console.log(e);
         }
