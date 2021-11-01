@@ -14,7 +14,7 @@ export function requireAuthentication(gssp: GetServerSideProps) {
                 const data = await res.data;
                 logged = data.logged;
             } catch (e) {
-                console.log(e);
+                console.log('Unauthorized')
             }
             if (!logged) {
                 return {
@@ -41,7 +41,7 @@ export function notRequireAuthentication(gssp: GetServerSideProps) {
                 const data = await res.data;
                 logged = data.logged;
             } catch (e) {
-                console.log(e);
+                console.log('Allow')
             }
             if (logged) {
                 return {
