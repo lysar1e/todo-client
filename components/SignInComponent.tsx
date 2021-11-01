@@ -19,6 +19,7 @@ export const SignInComponent: React.FC = () => {
   };
   const loginHandler = async () => {
     try {
+      setErrMessage("");
       setIsLoading(true);
       await axios
           .post(
@@ -28,10 +29,9 @@ export const SignInComponent: React.FC = () => {
                 withCredentials: true,
               }
           )
-          .then(() => {
-            // router.reload();
+          .then(async () => {
+            await router.push("/");
             setIsLoading(false);
-            router.push("/");
           })
           .catch((err) => {
             setIsLoading(false);
@@ -69,6 +69,12 @@ export const SignInComponent: React.FC = () => {
                 </div>
               </div>
               <div className="row">
+                {
+                  errMessage &&
+                  <div className="alert-red">
+                    {errMessage}
+                </div>
+                }
                 <button
                     className={`waves-effect waves-light btn ${theme.theme === "dark" ? "dark" : "blue"}`}
                     onClick={() => loginHandler()}
