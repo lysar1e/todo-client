@@ -12,6 +12,8 @@ export const BoardComponent: React.FC<BoardProps> = observer (({board}) => {
     const [isLoading, setIsLoading] = useState(false);
     const id = router.query.id;
     const [text, setText] = useState("");
+    const important = board.todos.filter(item => item.important)
+    const notImportant = board.todos.filter(item => !item.important)
     useEffect(() => {
         if (board.generatedLink) {
             setInviteLink(board.generatedLink);
@@ -104,7 +106,7 @@ export const BoardComponent: React.FC<BoardProps> = observer (({board}) => {
                                    <h3 className={`my-boards ${theme.theme}`}>Активные задачи {board.todos.length}</h3>
                                    <div className="todos">
                                        {
-                                           board && board.todos ? board.todos.map((todo, index) => {
+                                           board && board.todos ? [...important, ...notImportant].map((todo, index) => {
                                                let cls = ['col todos-text'];
 
                                                if (todo.completed) {
