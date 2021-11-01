@@ -1,4 +1,5 @@
 import React from "react";
+import theme from "../store/theme";
 export const Loader: React.FC = () => {
     return (
         <div className="spinner">
@@ -14,7 +15,7 @@ export const Loader: React.FC = () => {
                     cy="50"
                     r="32"
                     strokeWidth="8"
-                    stroke="#0a0a0a"
+                    stroke={theme.theme === "dark" ? "#ffffff" : "#000000"}
                     strokeDasharray="50.26548245743669 50.26548245743669"
                     fill="none"
                     strokeLinecap="round"
