@@ -20,6 +20,7 @@ export const RegistrationComponent: React.FC = () => {
   const registerHandler = async () => {
     try {
       setIsLoading(true);
+      setRegErrMessage("");
       await axios
           .post(
               `${URL}/auth/sign-up`,
@@ -28,9 +29,9 @@ export const RegistrationComponent: React.FC = () => {
                 withCredentials: true,
               }
           )
-          .then(() => {
+          .then(async () => {
+            await router.push("/login");
             setIsLoading(false);
-            router.push("/login");
           })
           .catch((err: any) => {
             setIsLoading(false);
@@ -68,6 +69,12 @@ export const RegistrationComponent: React.FC = () => {
                 </div>
               </div>
               <div className="row">
+                {
+                  regErrMessage &&
+                      <div className="alert-red">
+                        {regErrMessage}
+                      </div>
+                }
                 <button
                     className={`waves-effect waves-light btn ${theme.theme === "dark" ? "dark" : "blue"}`}
                     onClick={() => registerHandler()}
