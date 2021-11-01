@@ -158,10 +158,19 @@ i:hover {
   width: 250px;
   margin: 0 auto;
 }
-.alert {
+.alert-success {
   padding: 20px;
   border-radius: 5px;
   background-color: green;
+  color: white;
+}
+
+.alert-red {
+  margin-top: -20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #D0342C;
   color: white;
 }
 
