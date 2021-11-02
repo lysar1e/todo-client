@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from "react";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 import {BoardProps} from "../pages/board/[id]";
 import {useRouter} from "next/router";
 import {axiosJWT} from "../utils/axios/axios";
@@ -8,6 +10,7 @@ import { Loader } from "./Loader";
 import {observer} from "mobx-react-lite";
 import theme from "../store/theme";
 export const BoardComponent: React.FC<BoardProps> = observer (({board}) => {
+    const MySwal = withReactContent(Swal)
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const id = router.query.id;
@@ -20,7 +23,7 @@ export const BoardComponent: React.FC<BoardProps> = observer (({board}) => {
         }
     }, []);
     const [inviteLink, setInviteLink] = useState("");
-    const createTodo = () => {
+    const createTodo = async () => {
         try {
             if (text) {
                 setIsLoading(true);
@@ -30,7 +33,11 @@ export const BoardComponent: React.FC<BoardProps> = observer (({board}) => {
                     setText("");
                 })
             } else {
-                alert("Невозможно добавить пустую задачу!");
+                await MySwal.fire({
+                    title: <strong>Ошибка при добавления задачи!</strong>,
+                    html: <i>Невозможно добавить пустую задачу.</i>,
+                    icon: 'error'
+                })
             }
         } catch (e) {
             console.log(e);
