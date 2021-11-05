@@ -31,10 +31,6 @@ const Home: NextPage<MainPageProps> = ({boards, contributorBoards}) => {
 export default Home;
 export const getServerSideProps: GetServerSideProps = requireAuthentication(
     async (ctx) => {
-        // console.log(ctx.req.headers.cookie);
-        // const res = await axios.get(`${URL}/todo/get/`, {withCredentials: true, headers: {
-        //         Cookie: ctx.req.headers.cookie
-        //     }});
         const res = await axios.get(`${URL}/board/get/`, {withCredentials: true, headers: {
                 Cookie: ctx.req.headers.cookie
             }});

@@ -21,8 +21,11 @@ axiosJWT.interceptors.response.use(
                     { withCredentials: true }
                 );
                 return axios.request(originalRequest);
-            } catch (e) {
-                console.log("НЕ АВТОРИЗОВАН", e);
+            } catch (e: any) {
+                if (e.response.data.statusCode === 403) {
+                    location.reload();
+                }
+                // console.log("НЕ АВТОРИЗОВАН", e);
             }
         }
         throw error;

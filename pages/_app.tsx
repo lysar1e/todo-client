@@ -6,14 +6,22 @@ import Script from "next/script";
 import {observer} from "mobx-react-lite";
 import theme from "../store/theme";
 import {useEffect} from "react";
-
+import {useRouter} from "next/router";
+import {URL} from "../constants/url";
+import {axiosJWT} from "../utils/axios/axios";
 
 const MyApp = observer(({ Component, pageProps }: AppProps) => {
+  const router = useRouter();
   useEffect(() => {
     const themeValue = window.localStorage.getItem("theme");
     document.body.className = themeValue!;
     theme.setTheme(themeValue!);
   }, [theme.theme]);
+  useEffect(() => {
+    if (router.pathname !== "/login" && router.pathname !== "/registration" && router.pathname !== "/forgot-password" && router.pathname !== "/reset-password/[id]/[token]") {
+      axiosJWT.get(`${URL}/auth/check`, {withCredentials: true});
+    }
+  }, [router.pathname]);
   return (
     <>
       <Head>

@@ -21,14 +21,14 @@ export const BoardComponent: React.FC<BoardProps> = observer (({board}) => {
         if (board.generatedLink) {
             setInviteLink(board.generatedLink);
         }
-    }, []);
+    }, [board.generatedLink]);
     const [inviteLink, setInviteLink] = useState("");
     const createTodo = async () => {
         try {
             if (text) {
                 setIsLoading(true);
                 axiosJWT.post(`${URL}/board/create-todo`, {boardId: id, text}, {withCredentials: true}).then(() => {
-                    router.replace(`/board/${id}`);
+                    router.replace(router.asPath);
                     setIsLoading(false);
                     setText("");
                 })
