@@ -315,3 +315,20 @@ nav {
 .show-modal {
   display: block!important;
 }
+.delete-btn {
+  color: #aaaaaa;
+  float: right;
+  font-size: 22px;
+  width: 10px;
+  /*top: 100px;*/
+  /*bottom: 0;*/
+  margin-left: 185px;
+  font-weight: bold;
+}
+.delete-btn:hover,
+.delete-btn:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+/*.card*/

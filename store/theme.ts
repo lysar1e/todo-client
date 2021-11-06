@@ -1,7 +1,7 @@
 import {makeAutoObservable} from "mobx";
 
 class Theme {
-    theme: string | undefined;
+    theme = "light"
     constructor() {
         makeAutoObservable(this);
     }

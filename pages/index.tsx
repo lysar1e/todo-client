@@ -1,14 +1,9 @@
 import type {GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import { requireAuthentication } from "../HOC/requireAuthentication";
-import styles from "../styles/Home.module.css";
 import {Navbar} from "../components/Navbar";
 import axios from "axios";
 import {URL} from "../constants/url";
-import {useState} from "react";
-import {axiosJWT} from "../utils/axios/axios";
-import {useRouter} from "next/router";
 import {MainPage} from "../components/MainPage";
 export type MainPageProps = {
     boards: {id: number, owner: number, name: string, contributors: number[]}[];

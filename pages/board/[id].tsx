@@ -2,12 +2,18 @@ import {GetServerSideProps, NextPage} from "next";
 import {BoardComponent} from "../../components/BoardComponent";
 import axios from "axios";
 import {URL} from "../../constants/url";
+import Head from "next/head";
 export type BoardProps = {
     board: {id: number, owner: number, name: string, contributors: number[], generatedLink: string, todos: {id: number, text: string; completed: boolean; important: boolean}[]};
 }
 const Board: NextPage<BoardProps> = ({board}) => {
     return (
+        <>
+            <Head>
+                <title>Доска {board.name}</title>
+            </Head>
         <BoardComponent board={board}/>
+        </>
     )
 }
 export default Board;

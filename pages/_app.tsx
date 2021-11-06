@@ -13,7 +13,7 @@ import {axiosJWT} from "../utils/axios/axios";
 const MyApp = observer(({ Component, pageProps }: AppProps) => {
   const router = useRouter();
   useEffect(() => {
-    const themeValue = window.localStorage.getItem("theme");
+    const themeValue = window.localStorage.getItem("theme")
     document.body.className = themeValue!;
     theme.setTheme(themeValue!);
   }, [theme.theme]);
@@ -23,22 +23,22 @@ const MyApp = observer(({ Component, pageProps }: AppProps) => {
     }
   }, [router.pathname]);
   return (
-    <>
-      <Head>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-        />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet"
-        />
-      </Head>
+      <>
+        <Head>
+          <link
+              rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+          />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link
+              href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+              rel="stylesheet"
+          />
+          <link
+              href="https://fonts.googleapis.com/icon?family=Material+Icons"
+              rel="stylesheet"
+          />
+        </Head>
         <NextNProgress
             color={theme.theme === "dark" ? "#fa6ba4" : "#fc1100"}
             startPosition={0.3}
@@ -48,7 +48,7 @@ const MyApp = observer(({ Component, pageProps }: AppProps) => {
         />
         <Script strategy='lazyOnload' src={`https://www.googletagmanager.com/gtag/js?id=G-SV7L62HNPZ`} />
         <Script id="google-analytics" strategy='lazyOnload'>
-            {`
+          {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
@@ -56,8 +56,8 @@ const MyApp = observer(({ Component, pageProps }: AppProps) => {
                 gtag('config', 'G-SV7L62HNPZ');
             `}
         </Script>
-      <Component {...pageProps} />
-    </>
+        <Component {...pageProps} />
+      </>
   );
 })
 
