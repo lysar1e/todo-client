@@ -5,12 +5,10 @@ import {Loader} from "./Loader";
 import {useRouter} from "next/router";
 import {observer} from "mobx-react-lite";
 import theme from "../store/theme";
-type Props = {
-    isClicked: boolean;
-    setIsClicked: React.Dispatch<React.SetStateAction<boolean>>;
-}
-export const AddBoardModal: React.FC<Props> = observer(({isClicked, setIsClicked}) => {
+
+export const AddBoardModal: React.FC = observer(() => {
     const [isLoading, setIsLoading] = useState(false);
+    const [isClicked, setIsClicked] = useState(false);
     const router = useRouter();
     useEffect(() => {
         document.body.addEventListener("click", function (event) {
@@ -40,7 +38,8 @@ export const AddBoardModal: React.FC<Props> = observer(({isClicked, setIsClicked
     }
     return (
         <>
-                <div id="myModal" className={isClicked ? "modalka show" : "modalka"}>
+            <button className={`btn ${theme.theme}`} onClick={() => setIsClicked(true)} data-testid="add-board-modal">Добавить доску</button>
+                <div id="myModal" className={isClicked ? "modalka show" : "modalka"} data-testid="my-modal">
                     <div className={`modal-content ${theme.theme}`}>
                         {isLoading ? <Loader/> :
                             <>

@@ -36,10 +36,10 @@ export const Navbar: React.FC<Props> = observer(({isLogin}) => {
         }
     }
   return (
-    <nav className={theme.theme}>
+    <nav className={theme.theme} data-testid="nav">
         <div className={`nav-wrapper navbar ${theme.theme === "dark" ? "dark" : "blue"} container`}>
         <Link href="/">
-          <a className="brand-logo">MERN Todo App</a>
+          <a className="brand-logo" data-testid="brand">MERN Todo App</a>
         </Link>
         {isLogin ? (
             <>
@@ -52,7 +52,7 @@ export const Navbar: React.FC<Props> = observer(({isLogin}) => {
                         <div className="switch">
                             <label>
                                 <span className={`mobile-text switch-text ${theme.theme}`}>Light theme</span>
-                                <input type="checkbox" defaultChecked={checked} onClick={() => changeTheme()} />
+                                <input type="checkbox" defaultChecked={checked} onClick={() => changeTheme()} data-testid="btn" />
                                 <span className="lever"></span>
                                 <span className={`mobile-text switch-text ${theme.theme}`}>Dark theme</span>
                             </label>

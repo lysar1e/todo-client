@@ -6,10 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p 8888",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest --env=jsdom"
   },
   "dependencies": {
     "axios": "^0.21.4",
+    "babel-plugin-react-remove-properties": "^0.3.0",
     "mobx": "^6.3.5",
     "mobx-react-lite": "^3.2.1",
     "next": "^12.0.3",
@@ -20,9 +22,15 @@
     "sweetalert2-react-content": "^4.2.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.15.0",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
     "@types/react": "17.0.26",
+    "babel-jest": "^27.3.1",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
+    "jest": "^27.3.1",
+    "ts-node": "^10.4.0",
     "typescript": "4.4.3"
   }
 }
