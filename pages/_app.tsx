@@ -30,14 +30,14 @@ const MyApp = observer(({ Component, pageProps }: AppProps) => {
               href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
           />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
-          {/*<link*/}
-          {/*    href="//fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"*/}
-          {/*    rel="stylesheet"*/}
-          {/*/>*/}
-          {/*<link*/}
-          {/*    href="//fonts.googleapis.com/icon?family=Material+Icons"*/}
-          {/*    rel="stylesheet"*/}
-          {/*/>*/}
+          <link
+              href="//fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+              rel="stylesheet"
+          />
+          <link
+              href="//fonts.googleapis.com/icon?family=Material+Icons"
+              rel="stylesheet"
+          />
         </Head>
         <NextNProgress
             color={theme.theme === "dark" ? "#fa6ba4" : "#fc1100"}
@@ -46,6 +46,16 @@ const MyApp = observer(({ Component, pageProps }: AppProps) => {
             height={5}
             showOnShallow={true}
         />
+        <Script strategy='lazyOnload' src={`https://www.googletagmanager.com/gtag/js?id=G-SV7L62HNPZ`} />
+        <Script id="google-analytics" strategy='lazyOnload'>
+          {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+            
+                gtag('config', 'G-SV7L62HNPZ');
+            `}
+        </Script>
         <Component {...pageProps} />
       </>
   );
