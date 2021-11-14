@@ -6,6 +6,7 @@ import {useRouter} from "next/router";
 import theme from "../store/theme";
 import {observer} from "mobx-react-lite";
 import {BurgerIcon} from "./BurgerIcon";
+import user from "../store/user";
 type Props = {
     isLogin?: boolean;
 }
@@ -13,6 +14,7 @@ export const Navbar: React.FC<Props> = observer(({isLogin}) => {
     const router = useRouter();
     const [checked, setChecked] = useState(false);
     const [clicked, setClicked] = useState(false);
+    const [role, setRole] = useState('user');
     useEffect(() => {
         if (theme.theme === "dark") {
             setChecked(true);
@@ -75,6 +77,12 @@ export const Navbar: React.FC<Props> = observer(({isLogin}) => {
               <Link href="/">
                 <a onClick={() => logout()}>Выйти</a>
               </Link>
+                              {
+                                  user.role === "admin" &&
+                                  <Link href="/admin">
+                                      <a>Админ панель</a>
+                                  </Link>
+                              }
             </li>
           </ul>
             </>

@@ -2,13 +2,13 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import NextNProgress from "nextjs-progressbar";
-import Script from "next/script";
 import {observer} from "mobx-react-lite";
 import theme from "../store/theme";
 import {useEffect} from "react";
 import {useRouter} from "next/router";
 import {URL} from "../constants/url";
 import {axiosJWT} from "../utils/axios/axios";
+import user from "../store/user";
 
 const MyApp = observer(({ Component, pageProps }: AppProps) => {
   const router = useRouter();
@@ -18,9 +18,13 @@ const MyApp = observer(({ Component, pageProps }: AppProps) => {
     theme.setTheme(themeValue!);
   }, [theme.theme]);
   useEffect(() => {
-    if (router.pathname !== "/login" && router.pathname !== "/registration" && router.pathname !== "/forgot-password" && router.pathname !== "/reset-password/[id]/[token]") {
-      axiosJWT.get(`${URL}/auth/check`, {withCredentials: true});
-    }
+      const getUserData = async () => {
+          if (router.pathname !== "/login" && router.pathname !== "/registration" && router.pathname !== "/forgot-password" && router.pathname !== "/reset-password/[id]/[token]") {
+              const {data} = await axiosJWT.get(`${URL}/auth/check`, {withCredentials: true});
+              user.setRole(data.role);
+          }
+      }
+      getUserData();
   }, [router.pathname]);
   return (
       <>
@@ -46,16 +50,6 @@ const MyApp = observer(({ Component, pageProps }: AppProps) => {
             height={5}
             showOnShallow={true}
         />
-        <Script strategy='lazyOnload' src={`https://www.googletagmanager.com/gtag/js?id=G-SV7L62HNPZ`} />
-        <Script id="google-analytics" strategy='lazyOnload'>
-          {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-            
-                gtag('config', 'G-SV7L62HNPZ');
-            `}
-        </Script>
         <Component {...pageProps} />
       </>
   );

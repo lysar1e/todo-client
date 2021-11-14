@@ -55,3 +55,32 @@ export function notRequireAuthentication(gssp: GetServerSideProps) {
         return await gssp(ctx);
     };
 }
+
+export function requireAdminRole(gssp: GetServerSideProps) {
+    return async (ctx: GetServerSidePropsContext) => {
+        const { req, res } = ctx;
+        let admin = false;
+        if (req.cookies) {
+            try {
+                const res = await axios.get(`${URL}/auth`, {
+                    withCredentials: true,
+                    headers: { cookie: ctx.req.headers.cookie },
+                });
+                const data = await res.data;
+                admin = await data.role === "admin";
+            } catch (e) {
+                res.statusCode = 404;
+                console.log('Not admin');
+            }
+            if (!admin) {
+                return {
+                    redirect: {
+                        permanent: false,
+                        destination: "/",
+                    },
+                };
+            }
+        }
+        return await gssp(ctx);
+    };
+}

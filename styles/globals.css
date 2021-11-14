@@ -332,3 +332,14 @@ nav {
   cursor: pointer;
 }
 /*.card*/
+.admin-users {
+  padding-top: 10px;
+  margin-top: 10px;
+  font-size: 24px;
+}
+.btn-small.dark {
+  background-color: #fa6ba4;
+}
+input[type=email]:not(.browser-default):focus:not([readonly]) {
+  border-bottom: none;
+}
