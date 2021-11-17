@@ -21,20 +21,20 @@ export const AdminPanel: React.FC = () => {
             <button className={`btn ${theme.theme}`} onClick={() => fetchUsers()}>Get users</button>
             {
                 users &&
-                    <>
+                <>
                     <h2>{users.length} users</h2>
-                        <ul>
-                            {
-                                users.map(({id, email, role}) => {
-                                    return (
-                                        <>
+                    <ul>
+                        {
+                            users.map(({id, email, role}) => {
+                                return (
+                                    <>
                                         <li key={email + role + id} className='admin-users'><span>user id: {id}</span> {email} <span>user role: {role}</span> {role !== "admin" && <button className={`btn-small ${theme.theme}`} onClick={() => issueAdminRoleToUser(id)}>Выдать роль админа</button>}</li>
-                                        </>
-                                    )
-                                })
-                            }
-                        </ul>
-                    </>
+                                    </>
+                                )
+                            })
+                        }
+                    </ul>
+                </>
             }
         </div>
     )
