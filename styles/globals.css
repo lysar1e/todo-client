@@ -343,3 +343,7 @@ nav {
 input[type=email]:not(.browser-default):focus:not([readonly]) {
   border-bottom: none;
 }
+.buy-sub {
+  color: #0070f3;
+  cursor: pointer;
+}

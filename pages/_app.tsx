@@ -22,6 +22,7 @@ const MyApp = observer(({ Component, pageProps }: AppProps) => {
           if (router.pathname !== "/login" && router.pathname !== "/registration" && router.pathname !== "/forgot-password" && router.pathname !== "/reset-password/[id]/[token]") {
               const {data} = await axiosJWT.get(`${URL}/auth/check`, {withCredentials: true});
               user.setRole(data.role);
+              user.setHasSubscription(data.sub);
           }
       }
       getUserData();
