@@ -23,8 +23,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - name: Install Dependencies
-        run: yarn install
+      - name: Install Dev Dependencies
+        run: yarn install --dev-dependencies
 
       - name: Unit Tests
         run: yarn test
@@ -44,7 +44,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: yarn install    
+    - run: yarn install --prod
     - run: yarn build
     - run: pm2 reload client-new
     
