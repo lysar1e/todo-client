@@ -44,7 +44,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: yarn install --prod
+    - run: yarn install
     - run: yarn build
     - run: pm2 reload client-new
     
