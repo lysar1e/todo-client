@@ -1,21 +1,21 @@
-import {GetServerSideProps, NextPage} from "next";
-import { RegistrationComponent } from "../components/RegistrationComponent";
-import {notRequireAuthentication} from "../HOC/requireAuthentication";
-import {Navbar} from "../components/Navbar";
+import { GetServerSideProps, NextPage } from "next";
+import { RegistrationComponent } from "../components/Register";
+import { notRequireAuthentication } from "../HOC/requireAuthentication";
+import { Navbar } from "../components/Navbar";
 
 const Registration: NextPage = () => {
   return (
-      <>
-          <Navbar isLogin={false}/>
+    <>
+      <Navbar isLogin={false} />
       <RegistrationComponent />
-      </>
+    </>
   );
 };
 export default Registration;
 export const getServerSideProps: GetServerSideProps = notRequireAuthentication(
-    async (ctx) => {
-      return {
-        props: {},
-      };
-    }
+  async (ctx) => {
+    return {
+      props: {},
+    };
+  }
 );
