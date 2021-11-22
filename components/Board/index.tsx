@@ -18,12 +18,36 @@ export const BoardComponent: React.FC<BoardProps> = observer(({ board }) => {
   const [text, setText] = useState("");
   const important = board.todos.filter((item) => item.important);
   const notImportant = board.todos.filter((item) => !item.important);
+  const [clickedToEdit, setClickedToEdit] = useState(false);
+  const [clickedEditId, setClickedEditId] = useState(0);
+  const [textToEdit, setTextToEdit] = useState("");
+  const handleEditClick = (todoId: number, todoText: string) => {
+    setClickedToEdit(!clickedToEdit);
+    setTextToEdit(todoText);
+    setClickedEditId(todoId);
+  };
   useEffect(() => {
     if (board.generatedLink) {
       setInviteLink(board.generatedLink);
     }
   }, [board.generatedLink]);
   const [inviteLink, setInviteLink] = useState("");
+  const editTodoText = (todoId: number, newText: string) => {
+    axiosJWT
+      .post(
+        `${URL}/board/todo/edit-text`,
+        {
+          boardId: board.id,
+          todoId,
+          newText,
+        },
+        { withCredentials: true }
+      )
+      .then(async () => {
+        setClickedToEdit(false);
+        await router.replace(router.asPath);
+      });
+  };
   const createTodo = async () => {
     try {
       if (text) {
@@ -189,7 +213,31 @@ export const BoardComponent: React.FC<BoardProps> = observer(({ board }) => {
                             !todo.important ? theme.theme : null
                           }`}
                         >
-                          {todo.text}
+                          <span>{todo.text}</span>
+                          {clickedToEdit && todo.id === clickedEditId && (
+                            <>
+                              <input
+                                type="text"
+                                className={theme.theme}
+                                placeholder={todo.text}
+                                value={textToEdit}
+                                onChange={({ target }) =>
+                                  setTextToEdit(target.value)
+                                }
+                              />
+                              <button
+                                className={`btn-small ${theme.theme}`}
+                                disabled={
+                                  todo.text === textToEdit || textToEdit === ""
+                                }
+                                onClick={() =>
+                                  editTodoText(todo.id, textToEdit)
+                                }
+                              >
+                                Изменить текст
+                              </button>
+                            </>
+                          )}
                         </div>
                         <div className={`col ${styles.todosButtons}`}>
                           <i
@@ -209,6 +257,13 @@ export const BoardComponent: React.FC<BoardProps> = observer(({ board }) => {
                             onClick={() => removeTodo(todo.id)}
                           >
                             delete
+                          </i>
+                          <i
+                            className="material-icons"
+                            onClick={() => handleEditClick(todo.id, todo.text)}
+                            data-testid="edit-btn"
+                          >
+                            edit
                           </i>
                         </div>
                       </div>
