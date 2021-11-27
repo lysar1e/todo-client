@@ -21,6 +21,8 @@ export const BoardComponent: React.FC<BoardProps> = observer(({ board }) => {
   const [clickedToEdit, setClickedToEdit] = useState(false);
   const [clickedEditId, setClickedEditId] = useState(0);
   const [textToEdit, setTextToEdit] = useState("");
+  const [clickedToEditBoardName, setClickedToEditBoardName] = useState(false);
+  const [newBoardName, setNewBoardName] = useState("");
   const handleEditClick = (todoId: number, todoText: string) => {
     setClickedToEdit(!clickedToEdit);
     setTextToEdit(todoText);
@@ -120,12 +122,51 @@ export const BoardComponent: React.FC<BoardProps> = observer(({ board }) => {
         setInviteLink(data.to);
       });
   };
+
+  const editBoardName = () => {
+    axiosJWT
+      .post(
+        `${URL}/board/edit-name`,
+        { boardId: id, newBoardName },
+        { withCredentials: true }
+      )
+      .then(async () => {
+        setClickedToEditBoardName(false);
+        await router.replace(router.asPath);
+      });
+  };
+
   return (
     <>
       <Navbar isLogin={true} />
       <div className="container">
         <h3 className={`my-boards ${theme.theme}`}>
-          Доска {board && board.name}
+          Доска {board && board.name}{" "}
+          <i
+            title="Изменить название доски"
+            className={`material-icons ${styles.edit}`}
+            onClick={() => setClickedToEditBoardName(!clickedToEditBoardName)}
+            data-testid="edit-btn"
+          >
+            edit
+          </i>
+          {clickedToEditBoardName && (
+            <>
+              <input
+                type="text"
+                className={theme.theme}
+                placeholder={board.name}
+                onChange={({ target }) => setNewBoardName(target.value)}
+              />
+              <button
+                className={`btn-small ${theme.theme}`}
+                disabled={board.name === newBoardName || !newBoardName}
+                onClick={() => editBoardName()}
+              >
+                Изменить название доски
+              </button>
+            </>
+          )}
         </h3>
         {!inviteLink && (
           <button
