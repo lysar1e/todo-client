@@ -14,7 +14,7 @@ export const BoardsComponent: React.FC<BoardsComponentProps> = ({ boards }) => {
   const MySwal = withReactContent(Swal);
   const router = useRouter();
   const deleteBoard = (boardId: number) => {
-    const consent = confirm("Точно удалить эту доску?");
+    const consent = confirm("Точно удалxxить эту доску?");
     if (!consent) {
       return;
     }
@@ -30,10 +30,10 @@ export const BoardsComponent: React.FC<BoardsComponentProps> = ({ boards }) => {
   };
   return (
     <div className={styles.cards}>
-      {boards.length ? (
+      {boards && boards.length ? (
         boards.map((item) => {
           return (
-            <div className="card horizontal" key={item.id}>
+            <div className="card horizontal" key={item.id} draggable={true}>
               <div className={`card-stacked ${theme.theme}`}>
                 <span
                   className={styles.deleteBtn}

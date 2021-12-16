@@ -38,7 +38,7 @@ export const getServerSideProps: GetServerSideProps = requireAuthentication(
       },
     });
     const data = await res.data;
-
+    console.log(data);
     return {
       props: { boards: data.boards, contributorBoards: data.contributorBoards },
     };
