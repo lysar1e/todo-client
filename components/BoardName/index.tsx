@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import theme from "../../store/theme";
 import styles from "../Board/Board.module.scss";
 import { BoardProps } from "../../pages/board/[id]";

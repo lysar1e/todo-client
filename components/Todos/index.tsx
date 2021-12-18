@@ -161,20 +161,22 @@ export const Todos: React.FC<Props> = ({ todos, setIsLoading, boardId }) => {
               <span>{todo.text}</span>
               {clickedToEdit && todo.id === clickedEditId && (
                 <>
-                  <input
-                    type="text"
-                    className={theme.theme}
-                    placeholder={todo.text}
-                    value={textToEdit}
-                    onChange={({ target }) => setTextToEdit(target.value)}
-                  />
-                  <button
-                    className={`btn-small ${theme.theme}`}
-                    disabled={todo.text === textToEdit || textToEdit === ""}
-                    onClick={() => editTodoText(todo.id, textToEdit)}
-                  >
-                    Изменить текст
-                  </button>
+                  <form onSubmit={(e) => e.preventDefault()}>
+                    <input
+                      type="text"
+                      className={theme.theme}
+                      placeholder={todo.text}
+                      value={textToEdit}
+                      onChange={({ target }) => setTextToEdit(target.value)}
+                    />
+                    <button
+                      className={`btn-small ${theme.theme}`}
+                      disabled={todo.text === textToEdit || textToEdit === ""}
+                      onClick={() => editTodoText(todo.id, textToEdit)}
+                    >
+                      Изменить текст
+                    </button>
+                  </form>
                 </>
               )}
             </div>
