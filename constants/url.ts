@@ -1,1 +1,1 @@
-export const URL = "https://api.asfafsa.fun";
+export const URL = "https://api.fasfafsa.fun";
